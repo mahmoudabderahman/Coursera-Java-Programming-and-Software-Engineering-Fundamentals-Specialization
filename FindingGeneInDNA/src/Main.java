@@ -1,15 +1,21 @@
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello World!");
-        testFindGeneSimple("AATGCGTAATATGGT");
-        testFindGeneSimple("AATGCTAGGGTAATATGGT");
-        testFindGeneSimple("ATCCTATGCTTCGGCTGCTCTAATATGGT");
-        testFindGeneSimple("TAA");
+        testFindGene("AATGCGTAATATGGT");
+        testFindGene("AATGCTAGGGTAATATGGT");
+        testFindGene("ATCCTATGCTTCGGCTGCTCTAATATGGT");
+        testFindGene("TAA");
+        testFindGene("ATG");
+        testFindGene("AAATGCCCTAACTAGATTAAGAAACC");
+        testFindGene("ATGATCGCTAATGCTGCTTAAGCTATG");
+        testFindGene("AATGCGTAATATGGTAATGCTAGGGTAATATGGTATCCTATGCTTCGGCTGCTCTAATATGGTTAAATGAAATGCCCTAACTAGATTAAGAAACC");
     }
-    public static void testFindGeneSimple(String dna) {
+    public static void testFindGene(String dna) {
 
         FindGene findGene = new FindGene();
 
         System.out.println("Found gene in the dna [" + dna + "] is " + findGene.findGene(dna));
     }
+
+
 }

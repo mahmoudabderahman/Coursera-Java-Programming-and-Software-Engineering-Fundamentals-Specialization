@@ -38,8 +38,8 @@ public class FindGene {
      * @param dna String represents the DNA string.
      * @return The gene if it's found or "gene not found", if there is not
      */
-    public String findGene(String dna) {
-        int startIndex = dna.indexOf("ATG");
+    public String findGene(String dna, int where) {
+        int startIndex = dna.indexOf("ATG", where);
         if (startIndex == -1)
         {
             return "Gene not found!";
@@ -49,8 +49,17 @@ public class FindGene {
             int taaIndex = findStopCodon(dna, startIndex, "TAA");
             int tagIndex = findStopCodon(dna, startIndex, "TAG");
             int tgaIndex = findStopCodon(dna, startIndex, "TGA");
-            int minIndex = Math.min(Math.min(taaIndex, tagIndex) , tgaIndex);
-            if (minIndex == dna.length())
+            int minIndex;
+            if(taaIndex == -1 || (tgaIndex != -1 && tgaIndex < taaIndex)) {
+                minIndex = tgaIndex;
+            }
+            else {
+                minIndex = taaIndex;
+            }
+            if(minIndex == -1 || (tagIndex != -1 && tagIndex < minIndex)) {
+                minIndex = tagIndex;
+            }
+            if (minIndex == -1)
             {
                 return "Gene not found!";
             }
@@ -59,17 +68,78 @@ public class FindGene {
 
     }
 
+    /**
+     * Find the index of the first occurred gene, based on the codon passed.
+     * @param str String represents the dna String
+     * @param startIndex int represents the point, at which the search starts
+     * @param codon String represents the codon
+     * @return index of the found codon, if it meets the criteria
+     */
     public int findStopCodon(String str, int startIndex, String codon) {
         int currIndex  = str.indexOf(codon, startIndex + 3);
         while(currIndex != -1) {
             if ((currIndex - startIndex) % 3 == 0){
                 return  currIndex;
-                //startIndex = start;
             }
             else {
                 currIndex = str.indexOf(codon, currIndex + 1);
             }
         }
-        return str.length();
+        return -1;
+    }
+
+    /**
+     * Find all the possible genes in a String.
+     * @param dna String represents the dna String.
+     * @return An arraylist of all found genes.
+     */
+    public String findMultipleGenes(String dna){
+        ArrayList<String> genes = new ArrayList<String>();
+        int startIndex = 0;
+
+        while (startIndex <= dna.length()) {
+            startIndex = dna.indexOf("ATG", startIndex);
+            if (startIndex == -1)
+            {
+                return genes.toString();
+                //return "Gene not found!";
+            }
+            else{
+                int taaIndex = findStopCodon(dna, startIndex, "TAA");
+                int tagIndex = findStopCodon(dna, startIndex, "TAG");
+                int tgaIndex = findStopCodon(dna, startIndex, "TGA");
+                int minIndex;
+                if(taaIndex == -1 || (tgaIndex != -1 && tgaIndex < taaIndex)) {
+                    minIndex = tgaIndex;
+                }
+                else {
+                    minIndex = taaIndex;
+                }
+                if(minIndex == -1 || (tagIndex != -1 && tagIndex < minIndex)) {
+                    minIndex = tagIndex;
+                }
+                if (minIndex == -1)
+                {
+                    genes.add("Gene not found!");
+                }
+                genes.add(dna.substring(startIndex, minIndex + 3));
+                startIndex = minIndex + 3;
+            }
+
+        }
+        return genes.toString();
+    }
+
+    public void findMultipleGenesInstructorImplementation(String dna) {
+        int startIndex = 0;
+
+        while (true) {
+            String currentGene = findGene(dna, startIndex);
+            if (currentGene.equals("Gene not found!")) {
+                break;
+            }
+            System.out.println(currentGene);
+            startIndex = dna.indexOf(currentGene, startIndex) + currentGene.length();
+        }
     }
 }

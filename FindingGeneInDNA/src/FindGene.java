@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-
+import duke_source.edu.duke.*;
 public class FindGene {
 
     /**
@@ -42,7 +42,7 @@ public class FindGene {
         int startIndex = dna.indexOf("ATG", where);
         if (startIndex == -1)
         {
-            return "Gene not found!";
+            return "";
         }
         else
         {
@@ -61,7 +61,7 @@ public class FindGene {
             }
             if (minIndex == -1)
             {
-                return "Gene not found!";
+                return "";
             }
             return dna.substring(startIndex, minIndex + 3);
         }
@@ -120,7 +120,7 @@ public class FindGene {
                 }
                 if (minIndex == -1)
                 {
-                    genes.add("Gene not found!");
+                    genes.add("");
                 }
                 genes.add(dna.substring(startIndex, minIndex + 3));
                 startIndex = minIndex + 3;
@@ -135,11 +135,38 @@ public class FindGene {
 
         while (true) {
             String currentGene = findGene(dna, startIndex);
-            if (currentGene.equals("Gene not found!")) {
+            if (currentGene.equals("")) {
                 break;
             }
             System.out.println(currentGene);
             startIndex = dna.indexOf(currentGene, startIndex) + currentGene.length();
+        }
+    }
+
+    public StorageResource getAllGenes(String dna) {
+
+        StorageResource geneList = new StorageResource();
+        int startIndex = 0;
+
+        while (true) {
+            String currentGene = findGene(dna, startIndex);
+
+            if (currentGene.isEmpty()) {
+                break;
+            }
+
+            geneList.add(currentGene);
+
+            startIndex = dna.indexOf(currentGene, startIndex) + currentGene.length();
+        }
+        return geneList;
+    }
+
+    public void testOn(String dna) {
+        System.out.println("Testing getAllGenes on " + dna);
+        StorageResource genes = getAllGenes(dna);
+        for (String g: genes.data()) {
+            System.out.println(g);
         }
     }
 }

@@ -1,3 +1,5 @@
+import edu.duke.FileResource;
+
 public class Main {
     public static void main(String[] args) {
         /**
@@ -13,8 +15,9 @@ public class Main {
         testFindGene("AATGCGTAATATGGTAATGCTAGGGTAATATGGTATCCTATGCTTCGGCTGCTCTAATATGGTTAAATGAAATGCCCTAACTAGATTAAGAAACC");
         System.out.println("----------------------------------------------------------------------------");
         testMultipleGenes("AATGCGTAATATGGTAATGCTAGGGTAATATGGTATCCTATGCTTCGGCTGCTCTAATATGGTTAAATGAAATGCCCTAACTAGATTAAGAAACC");
-        testMultipleGenes("ATGCCCTAAATGCCCTGAATGCCCTAG");
+        testMultipleGenes("ATGCCCTAAATGCCCTGAATGCCCTAG");StringsThirdAssignments
         **/
+        /**
         FindGene findGene = new FindGene();
         findGene.testOn("AATGCGTAATATGGTAATGCTAGGGTAATATGGTATCCTATGCTTCGGCTGCTCTAATATGGTTAAATGAAATGCCCTAACTAGATTAAGAAACC");
         System.out.println("\n\n");
@@ -22,7 +25,13 @@ public class Main {
         System.out.println("\n\n");
         findGene.testOn("");
         System.out.println("\n\n");
-        findGene.testOn("ATGATCTAATTTATGCTGCAACGGTGAAGA");
+        findGene.testOn("ATGATCATAAGAAGATAATAGAGGGCCATGTAA");
+         **/
+        // Assignment solution
+        Part1 part1 = new Part1();
+        FileResource fileResource = new FileResource("brca1line.fa");
+        String geneAsString = fileResource.asString();
+        part1.testProcessGenes(geneAsString);
 
     }
     public static void testFindGene(String dna) {

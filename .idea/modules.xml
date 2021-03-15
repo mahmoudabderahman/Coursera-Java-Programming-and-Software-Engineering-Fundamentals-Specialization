@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Coursera-Java-Programming-and-Software-Engineering-Fundamentals-Specialization.iml" filepath="$PROJECT_DIR$/Coursera-Java-Programming-and-Software-Engineering-Fundamentals-Specialization.iml" />
       <module fileurl="file://$PROJECT_DIR$/FindingGeneInDNA/FindingGeneInDNA.iml" filepath="$PROJECT_DIR$/FindingGeneInDNA/FindingGeneInDNA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FindingGeneInDNA/StringThirdAssignments.iml" filepath="$PROJECT_DIR$/FindingGeneInDNA/StringThirdAssignments.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FindingGeneInDNA/StringsThirdAssignments.iml" filepath="$PROJECT_DIR$/FindingGeneInDNA/StringsThirdAssignments.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../StringsThirdAssignments/StringsThirdAssignments1.iml" filepath="$PROJECT_DIR$/../StringsThirdAssignments/StringsThirdAssignments1.iml" />
     </modules>
   </component>
 </project>

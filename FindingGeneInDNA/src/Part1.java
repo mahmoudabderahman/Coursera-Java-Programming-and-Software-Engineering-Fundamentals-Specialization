@@ -1,40 +1,8 @@
-import java.util.ArrayList;
-
-import edu.duke.*;
 import edu.duke.StorageResource;
 
-public class FindGene {
+import java.util.ArrayList;
 
-    /**
-     * A method to check if a dna has a valid gene
-     * @param dna String represents the DNA string.
-     * @return The gene if it's found or "gene not found", if there is not
-     */
-    /**
-    public String findGene(String dna)
-    {
-        String result = "";
-
-        int startIndex = dna.indexOf("ATG");
-        if (startIndex == -1) { // no ATG
-        return "Gene not found";
-        }
-
-        int endIndex = dna.indexOf("TAA", startIndex + 3);
-        if (endIndex == -1) { // no TAA
-        }
-
-        if ((endIndex - startIndex) % 3 == 0)
-        {
-            result = dna.substring(startIndex, endIndex + 3);
-        }
-        else
-        {
-            return "Gene not found";
-        }
-        return result;
-    }
-    */
+public class Part1 {
     /**
      * A method to check if a dna has a valid gene
      * @param dna String represents the DNA string.
@@ -146,7 +114,8 @@ public class FindGene {
     }
 
     public StorageResource getAllGenes(String dna) {
-
+        dna = dna.toUpperCase();
+        System.out.println(dna);
         StorageResource geneList = new StorageResource();
         int startIndex = 0;
 
@@ -170,5 +139,80 @@ public class FindGene {
         for (String g: genes.data()) {
             System.out.println(g);
         }
+    }
+
+    public float cgRatio(String dna) {
+        dna = dna.toUpperCase();
+        int numberOfCs = 0;
+        int numberOfGs = 0;
+        for(int i = 0; i < dna.length(); i++) {
+            char c = dna.charAt(i);
+            if (c == 'C') {
+                numberOfCs++;
+            }
+            else if (c == 'G') {
+                numberOfGs++;
+            }
+        }
+        return ((float) numberOfCs) /  numberOfGs;
+    }
+
+
+    public int countCTG(String dna) {
+        int ctgS = 0;
+        int start = 0;
+
+        while (true) {
+            int ctgFound = dna.indexOf("CTG", start);
+            if (ctgFound != -1) {
+                ctgS++;
+                start = ctgFound + 3;
+            }
+            else{
+                break;
+            }
+        }
+        return ctgS;
+    }
+
+
+    public void processGenes(StorageResource sr) {
+        int moreThanNine = 0;
+        int ratioMoreThanZeroCommaThirtyFive = 0;
+        String longestGene = "";
+        int maxLongestGene = 0;
+
+        for(String storageResource : sr.data()) {
+            System.out.println(storageResource);
+            storageResource = storageResource.toUpperCase();
+            if (storageResource.length() > 60) {
+                System.out.println("Gene more than 9 chars: " + storageResource);
+                moreThanNine++;
+            }
+            if(cgRatio(storageResource) > 0.35) {
+                System.out.println("Gene's CG ratio more than 0.35: " + storageResource);
+                ratioMoreThanZeroCommaThirtyFive++;
+            }
+            //String gene = findGene(storageResource, 0);
+
+            if (storageResource.length() > maxLongestGene) {
+                maxLongestGene = storageResource.length();
+                longestGene = storageResource;
+            }
+            System.out.println("-----------------------------------------------------------------------");
+        }
+        System.out.println("More than nine characters: " + moreThanNine);
+        System.out.println("More than 0.35 ratio: " + ratioMoreThanZeroCommaThirtyFive);
+        System.out.println("Longest gene: " + maxLongestGene);
+
+
+    }
+    public void testProcessGenes(String dna) {
+        StorageResource sr = getAllGenes(dna);
+        System.out.println("Number of genes: " + sr.size());
+        //testOn(dna);
+        //sr.add(dna);
+        processGenes(sr);
+        System.out.println();
     }
 }

@@ -27,7 +27,7 @@ public class Main {
         System.out.println("\n\n");
         findGene.testOn("ATGATCATAAGAAGATAATAGAGGGCCATGTAA");
          **/
-        // Assignment solution
+        // Practical quiz solution
         Part1 part1 = new Part1();
         FileResource fileResource = new FileResource("brca1line.fa");
         String geneAsString = fileResource.asString();

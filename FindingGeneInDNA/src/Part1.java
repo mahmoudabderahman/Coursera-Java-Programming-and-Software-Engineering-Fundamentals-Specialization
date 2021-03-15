@@ -161,9 +161,10 @@ public class Part1 {
     public int countCTG(String dna) {
         int ctgS = 0;
         int start = 0;
-
+        dna = dna.toUpperCase();
         while (true) {
             int ctgFound = dna.indexOf("CTG", start);
+            //String cuttedString = dna.substring(ctgFound, dna.length());
             if (ctgFound != -1) {
                 ctgS++;
                 start = ctgFound + 3;
@@ -175,24 +176,26 @@ public class Part1 {
         return ctgS;
     }
 
+    public int
 
     public void processGenes(StorageResource sr) {
         int moreThanNine = 0;
         int ratioMoreThanZeroCommaThirtyFive = 0;
         String longestGene = "";
         int maxLongestGene = 0;
-
+        StringBuilder dna = new StringBuilder();
         for(String storageResource : sr.data()) {
             System.out.println(storageResource);
+            dna.append(storageResource);
             storageResource = storageResource.toUpperCase();
             if (storageResource.length() > 60) {
                 System.out.println("Gene more than 9 chars: " + storageResource);
                 moreThanNine++;
             }
-            if(cgRatio(storageResource) > 0.35) {
-                System.out.println("Gene's CG ratio more than 0.35: " + storageResource);
-                ratioMoreThanZeroCommaThirtyFive++;
-            }
+            //if(cgRatio(storageResource) > 0.35) {
+            //    System.out.println("Gene's CG ratio more than 0.35: " + storageResource);
+            //    ratioMoreThanZeroCommaThirtyFive++;
+            //}
             //String gene = findGene(storageResource, 0);
 
             if (storageResource.length() > maxLongestGene) {
@@ -204,7 +207,7 @@ public class Part1 {
         System.out.println("More than nine characters: " + moreThanNine);
         System.out.println("More than 0.35 ratio: " + ratioMoreThanZeroCommaThirtyFive);
         System.out.println("Longest gene: " + maxLongestGene);
-
+        System.out.println("Number of CTGs " + countCTG(dna.toString()));
 
     }
     public void testProcessGenes(String dna) {

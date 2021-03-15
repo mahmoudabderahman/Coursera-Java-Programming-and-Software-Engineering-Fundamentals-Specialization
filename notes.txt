@@ -7,3 +7,19 @@ Some important String methods:
         - If a second parameter is provided, the search will begin by this index.
  - The startsWith() method returns true or false stating if the string has this passed string as a first string.
  - The endsWith() method returns true or false stating if the string has this string as a end string.
+
+
+
+
+
+
+
+SOLUTIONS:
+Turkeys, Ducks and Quails
+The method mystery is given a string and it returns a string which is the same string but with the first three T’s removed.
+
+69
+23
+51
+224
+489

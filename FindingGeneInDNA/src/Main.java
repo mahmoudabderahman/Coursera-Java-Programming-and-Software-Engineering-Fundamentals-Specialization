@@ -1,7 +1,9 @@
 import edu.duke.FileResource;
+import edu.duke.URLResource;
 
 public class Main {
     public static void main(String[] args) {
+
         /**
         System.out.println("Hello World!");
         testFindGene("AATGCGTTAGTAAAATATGGT");
@@ -28,11 +30,21 @@ public class Main {
         findGene.testOn("ATGATCATAAGAAGATAATAGAGGGCCATGTAA");
          **/
         // Practical quiz solution
+        //Part1 part1 = new Part1();
+        //FileResource fileResource = new FileResource("brca1line.fa");
+        //String geneAsString = fileResource.asString();
+        //part1.testProcessGenes(geneAsString);
+        ///////////////////////////////////////////////////////
+        AssignmentOfStrings assignmentOfStrings = new AssignmentOfStrings();
+        //assignmentOfStrings.findYouTubeURLs("https://www.dukelearntoprogram.com//course2/data/manylinks.html");
+        //System.out.println(assignmentOfStrings.mystery("TTTTTTTATTTA"));
+        //assignmentOfStrings.getAllHrefsOfURL("https://www.dukelearntoprogram.com//course2/data/manylinks.html");
         Part1 part1 = new Part1();
-        FileResource fileResource = new FileResource("brca1line.fa");
-        String geneAsString = fileResource.asString();
-        part1.testProcessGenes(geneAsString);
-
+        //assignmentOfStrings.findGenesInURL("https://users.cs.duke.edu/~rodger/GRch38dnapart.fa");
+        URLResource urlResource = new URLResource("https://users.cs.duke.edu/~rodger/GRch38dnapart.fa");
+        String dna = urlResource.asString();
+        System.out.println(part1.countCTG(dna));
+        System.out.println(part1.cgRatio(dna));
     }
     public static void testFindGene(String dna) {
 

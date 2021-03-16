@@ -1,5 +1,6 @@
 import edu.duke.FileResource;
 import edu.duke.URLResource;
+import org.apache.commons.csv.CSVParser;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,6 +30,7 @@ public class Main {
         System.out.println("\n\n");
         findGene.testOn("ATGATCATAAGAAGATAATAGAGGGCCATGTAA");
          **/
+        /**
         // Practical quiz solution
         //Part1 part1 = new Part1();
         //FileResource fileResource = new FileResource("brca1line.fa");
@@ -46,6 +48,15 @@ public class Main {
         System.out.println(part1.countCTG(dna));
         System.out.println(part1.cgRatio(dna));
         System.out.println(part1.numberOfRatiosMoreThanZeroCommaThirtyFive(dna));
+        */
+        ReadCSVFile readCSVFile = new ReadCSVFile();
+        //readCSVFile.readFood();
+        FileResource fr = new FileResource();
+        CSVParser parser = fr.getCSVParser();
+        //readCSVFile.listExporters(parser, "coffee");
+        //System.out.println(readCSVFile.countryInfo(parser, "Germany"));
+        //readCSVFile.listExportersTwoProducts(parser, "gold", "diamonds");
+        System.out.println(readCSVFile.numberOfExporters(parser, "gold"));
     }
     public static void testFindGene(String dna) {
 

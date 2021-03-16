@@ -45,6 +45,7 @@ public class Main {
         String dna = urlResource.asString();
         System.out.println(part1.countCTG(dna));
         System.out.println(part1.cgRatio(dna));
+        System.out.println(part1.numberOfRatiosMoreThanZeroCommaThirtyFive(dna));
     }
     public static void testFindGene(String dna) {
 

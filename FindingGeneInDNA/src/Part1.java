@@ -154,7 +154,7 @@ public class Part1 {
                 numberOfGs++;
             }
         }
-        return ((float) numberOfCs) /  numberOfGs;
+        return ((float) numberOfCs + numberOfGs) /  dna.length();
     }
 
 
@@ -176,7 +176,18 @@ public class Part1 {
         return ctgS;
     }
 
-    public int
+    public int numberOfRatiosMoreThanZeroCommaThirtyFive(String dna) {
+        StorageResource geneList = new StorageResource();
+        geneList = getAllGenes(dna);
+        int number = 0;
+        for (String gene : geneList.data()) {
+            System.out.println(cgRatio(gene));
+            if (cgRatio(gene) > 0.35) {
+                number++;
+            }
+        }
+        return number;
+    }
 
     public void processGenes(StorageResource sr) {
         int moreThanNine = 0;

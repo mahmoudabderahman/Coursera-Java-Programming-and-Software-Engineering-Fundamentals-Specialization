@@ -1,6 +1,7 @@
 import edu.duke.FileResource;
 import edu.duke.URLResource;
 import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
 
 public class Main {
     public static void main(String[] args) {
@@ -54,9 +55,13 @@ public class Main {
         FileResource fr = new FileResource();
         CSVParser parser = fr.getCSVParser();
         //readCSVFile.listExporters(parser, "coffee");
-        //System.out.println(readCSVFile.countryInfo(parser, "Germany"));
-        //readCSVFile.listExportersTwoProducts(parser, "gold", "diamonds");
-        System.out.println(readCSVFile.numberOfExporters(parser, "gold"));
+        //System.out.println(readCSVFile.countryInfo(parser, "Nauru"));
+        //readCSVFile.listExportersTwoProducts(parser, "fish", "nuts");
+        //System.out.println(readCSVFile.numberOfExporters(parser, "gold"));
+        //readCSVFile.bigExporters(parser, "$999,999,999,999");
+        CSVRecord largest = readCSVFile.hottestInManyDays();
+        System.out.println("Hottest temperature was " + largest.get("TemperatureF") + " at " + largest.get("DateUTC"));
+
     }
     public static void testFindGene(String dna) {
 

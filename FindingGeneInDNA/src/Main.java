@@ -60,7 +60,10 @@ public class Main {
         //System.out.println(readCSVFile.numberOfExporters(parser, "gold"));
         //readCSVFile.bigExporters(parser, "$999,999,999,999");
         CSVRecord largest = readCSVFile.hottestInManyDays();
-        System.out.println("Hottest temperature was " + largest.get("TemperatureF") + " at " + largest.get("DateUTC"));
+        CSVRecord smallest = readCSVFile.coldestHourInFile(parser);
+        System.out.println("Coldest temperature was " + smallest.get("TemperatureF") + " at " + smallest.get("DateUTC"));
+
+        //System.out.println("Hottest temperature was " + largest.get("TemperatureF") + " at " + largest.get("DateUTC"));
 
     }
     public static void testFindGene(String dna) {

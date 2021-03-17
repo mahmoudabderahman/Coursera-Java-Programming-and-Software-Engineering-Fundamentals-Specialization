@@ -60,31 +60,21 @@ public class ReadCSVFile {
             }
         }
     }
-    /**
-    public String coldestHourInFile(CSVParser parser) {
-        CSVRecord records = parser.getRecords();
-        int max =
-        for (CSVRecord record : parser) {
 
+    public CSVRecord coldestHourInFile(CSVParser parser) {
+        CSVRecord coldestSoFar = null;
+
+        for (CSVRecord currentRow : parser) {
+            coldestSoFar = getSmallestOfTwo(coldestSoFar, currentRow);
         }
+        return coldestSoFar;
     }
-     */
+
     public CSVRecord hottestHourInFile(CSVParser parser) {
         CSVRecord largestSoFar = null;
 
         for (CSVRecord currentRow : parser) {
-            if (largestSoFar == null) {
-                largestSoFar = currentRow;
-            }
-            else
-            {
-                double currentTemp = Double.parseDouble(currentRow.get("TemperatureF"));
-                double largestTemp = Double.parseDouble(largestSoFar.get("TemperatureF"));
-
-                if (currentTemp > largestTemp) {
-                    largestSoFar = currentRow;
-                }
-            }
+            largestSoFar = getLargestOfTwo(largestSoFar, currentRow);
         }
 
         return largestSoFar;
@@ -93,21 +83,48 @@ public class ReadCSVFile {
     public CSVRecord hottestInManyDays() {
         CSVRecord largestSoFar = null;
         DirectoryResource dr = new DirectoryResource();
+        // iterate over files
         for (File f : dr.selectedFiles()) {
             FileResource fr = new FileResource(f);
+            // use method to get largest in file.
             CSVRecord currentRow = hottestHourInFile(fr.getCSVParser());
-            if (largestSoFar == null) {
-                largestSoFar = currentRow;
-            }
-            else {
-                double currentTemp = Double.parseDouble(currentRow.get("TemperatureF"));
-                double largestTemp = Double.parseDouble(largestSoFar.get("TemperatureF"));
+            largestSoFar = getLargestOfTwo(largestSoFar, currentRow);
+        }
+        //The largestSoFar is the answer
+        return largestSoFar;
+    }
 
-                if (currentTemp > largestTemp) {
-                    largestSoFar = currentRow;
-                }
+    private CSVRecord getLargestOfTwo(CSVRecord largestSoFar, CSVRecord currentRow) {
+        if (largestSoFar == null) {
+            largestSoFar = currentRow;
+        }
+        //Otherwise
+        else {
+            double currentTemp = Double.parseDouble(currentRow.get("TemperatureF"));
+            double largestTemp = Double.parseDouble(largestSoFar.get("TemperatureF"));
+            //Check if currentRow’s temperature > largestSoFar’s
+            if (currentTemp > largestTemp) {
+                //If so update largestSoFar to currentRow
+                largestSoFar = currentRow;
             }
         }
         return largestSoFar;
+    }
+
+    private CSVRecord getSmallestOfTwo(CSVRecord smallestSoFar, CSVRecord currentRow) {
+        if (smallestSoFar == null) {
+            smallestSoFar = currentRow;
+        }
+        //Otherwise
+        else {
+            double currentTemp = Double.parseDouble(currentRow.get("TemperatureF"));
+            double largestTemp = Double.parseDouble(smallestSoFar.get("TemperatureF"));
+            //Check if currentRow’s temperature > largestSoFar’s
+            if (currentTemp < largestTemp) {
+                //If so update largestSoFar to currentRow
+                smallestSoFar = currentRow;
+            }
+        }
+        return smallestSoFar;
     }
 }
